@@ -11,6 +11,15 @@ def create_emaployee role, parent_id
   puts "#{emp.id}, #{parent_id}"
 end
 
+Employee.create(
+  name: "ceo",
+  email: "ceo@employee.com",
+  salary: 15000000,
+  mobile: "8685948596",
+  rating: 4,
+  role: "ceo"
+)
+
 Employee::ROLES.each_with_index do |role, index|
   next if role == Employee::Roles::SDE
   Employee.where(role: role).pluck(:id).each do |id|
