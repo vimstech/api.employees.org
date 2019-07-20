@@ -50,7 +50,8 @@ class Employee < ApplicationRecord
   end
 
   def resign
-    self.reportees.update_all({parent_id: nil})
+    # all reportees under resignee should report to its reporter
+    self.reportees.update_all({parent_id: self.parent_id})
     self.is_active = false
     self.parent_id = nil
     save
