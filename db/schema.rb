@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_162857) do
     t.float "rating"
     t.string "role"
     t.integer "parent_id"
+    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
