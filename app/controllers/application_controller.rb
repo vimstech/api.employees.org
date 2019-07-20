@@ -22,6 +22,7 @@ class ApplicationController < ActionController::API
     end
     total = scope.count
     scope = scope.where(build_params[:query_options]) if build_params[:query_options]
+    scope = scope.select(build_params[:only]) if build_params[:only]
     if build_params[:page] && build_params[:per]
       page = build_params[:page].to_i
       per = build_params[:per].to_i

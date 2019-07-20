@@ -17,7 +17,7 @@ class Employee < ApplicationRecord
   validate :check_for_top_level, if: :parent_id_changed?
   validate :valid_role?
 
-  scope :active -> { where(is_active: true) }
+  scope :active, -> { where(is_active: true) }
 
   ROLES.each do |role|
     scope role.to_sym, ->{ where(role: role) }
