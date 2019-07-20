@@ -7,6 +7,8 @@ class Employee < ApplicationRecord
     SDE='sde'
   end
 
+  ROLES = Roles.constants.map{|c| Roles.const_get(c)}
+
   belongs_to :reporter, class_name: "Employee", foreign_key: :parent_id, optional: true
   has_many :reportees, class_name: "Employee", inverse_of: :reporter, foreign_key: :parent_id
 
@@ -15,9 +17,14 @@ class Employee < ApplicationRecord
   validate :check_for_top_level, if: :parent_id_changed?
   validate :valid_role?
 
+  scope :active -> { where(is_active: true) }
+
+  ROLES.each do |role|
+    scope role.to_sym, ->{ where(role: role) }
+  end
+
   def valid_role?
-    roles = Roles.constants.map{|c| Roles.const_get(c)}
-    if roles.exclude?(self.role)
+    if ROLES.exclude?(self.role)
       self.errors[:role] << " can only have values (#{roles.join(', ')})."
     end
   end
@@ -43,10 +50,9 @@ class Employee < ApplicationRecord
   end
 
   def resign
-    # what will happen to reportees of this employee if any
-    # can CEO resign
-    self.reportees.update_attributes({parent_id: nil})
-    self.is_active = true
+    self.reportees.update_all({parent_id: nil})
+    self.is_active = false
+    self.parent_id = nil
     save
   end
 end

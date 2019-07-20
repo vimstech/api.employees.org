@@ -2,7 +2,7 @@ class EmployeesController < ApplicationController
   before_action :find_employee, except: [:index, :create, :top]
 
   def index
-    employees = Employee.all
+    employees = build_scope(Employee)
     render json: employees.as_json(json_attributes)
   end
 
@@ -23,7 +23,7 @@ class EmployeesController < ApplicationController
   def update
     @employee.update(employee_params)
     if @employee.valid?
-      render json: @employee, status: :ok
+      render json: @employee.as_json(json_attributes), status: :ok
     else
       render json: @employee.errors, status: :unprocessable_entity
     end
