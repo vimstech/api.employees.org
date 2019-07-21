@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "4dbae4ee-1c7b-427a-b775-c878a4595cf1",
+		"name": "org.employees.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employees?page=1&per=10&only[]=name&only[]=role&only[]=salary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "per",
+							"value": "10"
+						},
+						{
+							"key": "only[]",
+							"value": "name"
+						},
+						{
+							"key": "only[]",
+							"value": "role"
+						},
+						{
+							"key": "only[]",
+							"value": "salary"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get employees",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees?page=1&per=10&only[]=name&only[]=role&only[]=salary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per",
+									"value": "10"
+								},
+								{
+									"key": "only[]",
+									"value": "name"
+								},
+								{
+									"key": "only[]",
+									"value": "role"
+								},
+								{
+									"key": "only[]",
+									"value": "salary"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Pagination",
+							"value": "{\"total\":781,\"pages\":78,\"offset\":0,\"per\":10,\"page\":1,\"status\":\"ok\"}"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5ed03befd856b57749b979638417a6b0\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "d4a415c4-2176-4616-b49e-2f0d6bc22512"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.105031"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \"ceo\",\n        \"salary\": 15000000,\n        \"role\": \"ceo\"\n    },\n    {\n        \"name\": \"Kush Dhawan\",\n        \"salary\": 3461733,\n        \"role\": \"vp\"\n    },\n    {\n        \"name\": \"Maria Bedi\",\n        \"salary\": 2564183,\n        \"role\": \"vp\"\n    },\n    {\n        \"name\": \"Riya Acharya\",\n        \"salary\": 2346954,\n        \"role\": \"vp\"\n    },\n    {\n        \"name\": \"Ananya Bajwa\",\n        \"salary\": 8059610,\n        \"role\": \"vp\"\n    },\n    {\n        \"name\": \"John Bhasin\",\n        \"salary\": 7538173,\n        \"role\": \"vp\"\n    },\n    {\n        \"name\": \"Aaradhya Reddy\",\n        \"salary\": 6659641,\n        \"role\": \"director\"\n    },\n    {\n        \"name\": \"Mishti Bakshi\",\n        \"salary\": 6799406,\n        \"role\": \"director\"\n    },\n    {\n        \"name\": \"Trisha Sharma\",\n        \"salary\": 4768803,\n        \"role\": \"director\"\n    },\n    {\n        \"name\": \"Joshua Garg\",\n        \"salary\": 3524921,\n        \"role\": \"director\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "create employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee\": {\n\t\t\"name\": \"ceo\",\n\t\t\"email\": \"ceo@employee.com\",\n\t\t\"salary\": 15000000,\n\t\t\"mobile\": \"8685948596\",\n\t\t\"rating\": 4,\n\t\t\"role\": \"ceo\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"employee\": {\n\t\t\"name\": \"ceo\",\n\t\t\"email\": \"ceo@employee.com\",\n\t\t\"salary\": 15000000,\n\t\t\"mobile\": \"8685948596\",\n\t\t\"rating\": 4,\n\t\t\"role\": \"ceo\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "resigning employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee\": {\n\t\t\"name\": \"ceo\",\n\t\t\"email\": \"ceo@employee.com\",\n\t\t\"salary\": 15000000,\n\t\t\"mobile\": \"8685948596\",\n\t\t\"rating\": 4.5,\n\t\t\"role\": \"ceo\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/employees/:employee_id/resign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						":employee_id",
+						"resign"
+					],
+					"variable": [
+						{
+							"key": "employee_id",
+							"value": "776"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "resigning employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"employee\": {\n\t\t\"name\": \"ceo\",\n\t\t\"email\": \"ceo@employee.com\",\n\t\t\"salary\": 15000000,\n\t\t\"mobile\": \"8685948596\",\n\t\t\"rating\": 4.5,\n\t\t\"role\": \"ceo\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees/:employee_id/resign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								":employee_id",
+								"resign"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "776"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"429a4a9606103da41256bcfc239ad746\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "990463f6-4e24-4bf3-b454-b01d0da4b0ae"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.379319"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 776,\n    \"is_active\": false,\n    \"parent_id\": null,\n    \"email\": \"geneva@schroeder.info\",\n    \"role\": \"sde\",\n    \"name\": \"Saathvik Pandey\",\n    \"salary\": 7429855,\n    \"mobile\": \"666-831-2981\",\n    \"rating\": 4,\n    \"created_at\": \"2019-07-20T13:01:43.033Z\",\n    \"updated_at\": \"2019-07-20T16:28:39.205Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "update employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee\": {\n\t\t\"salary\": 120000\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/employees/:employee_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						":employee_id"
+					],
+					"variable": [
+						{
+							"key": "employee_id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update employee",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"employee\": {\n\t\t\"salary\": 120000\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c2ec7433cc79ebc251906da1b9aa6b70\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "963f0c6c-94bb-4f74-aad4-3ef56ebd14fb"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "1.680097"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 8,\n    \"salary\": 120000,\n    \"email\": \"hedy_glover@walker.ca\",\n    \"parent_id\": 2,\n    \"role\": \"director\",\n    \"name\": \"Mishti Bakshi\",\n    \"mobile\": \"882-817-8332\",\n    \"rating\": 4,\n    \"is_active\": true,\n    \"created_at\": \"2019-07-20T12:51:48.055Z\",\n    \"updated_at\": \"2019-07-20T17:15:59.956Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get top ten employess (salary ratio)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/employees/top?only[]=name&only[]=salary&only[]=role",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"employees",
+						"top"
+					],
+					"query": [
+						{
+							"key": "only[]",
+							"value": "name"
+						},
+						{
+							"key": "only[]",
+							"value": "salary"
+						},
+						{
+							"key": "only[]",
+							"value": "role"
+						},
+						{
+							"key": null,
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get top ten employess (salary ratio)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees/top?only[]=name&only[]=salary&only[]=role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"top"
+							],
+							"query": [
+								{
+									"key": "only[]",
+									"value": "name"
+								},
+								{
+									"key": "only[]",
+									"value": "salary"
+								},
+								{
+									"key": "only[]",
+									"value": "role"
+								},
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"fd9abb2252230d9030819647fc4cbf85\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "93cbc52e-0165-4921-999f-3759a3ea145c"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.093061"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \"ceo\",\n        \"salary\": 15000000,\n        \"role\": \"ceo\"\n    },\n    {\n        \"name\": \"Vedant Khanna\",\n        \"salary\": 9988048,\n        \"role\": \"director\"\n    },\n    {\n        \"name\": \"Reyansh Khurana\",\n        \"salary\": 9985664,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Sarah Arya\",\n        \"salary\": 9981360,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Luke Dayal\",\n        \"salary\": 9968702,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Riddhi Dalal\",\n        \"salary\": 9968485,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Mishti Lal\",\n        \"salary\": 9941600,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Ryan Bajwa\",\n        \"salary\": 9929691,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Prisha Apte\",\n        \"salary\": 9927079,\n        \"role\": \"sde\"\n    },\n    {\n        \"name\": \"Divija Kohli\",\n        \"salary\": 9902418,\n        \"role\": \"manager\"\n    }\n]"
+				}
+			]
+		}
+	]
+}

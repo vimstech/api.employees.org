@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def top
-    employees = Employee.order(salary: :desc).take(10)
+    employees = Employee.where.not(role: 'ceo').order(salary: :desc).take(10)
     render json: employees.as_json(json_attributes)
   end
 
@@ -43,6 +43,9 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def search_params scope, search_params
+    scope.where('name ilike :name', name: search_params[:name])
+  end
   private
   def find_employee
     @employee = Employee.find params[:id]
