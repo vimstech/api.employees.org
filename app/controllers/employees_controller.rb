@@ -14,6 +14,9 @@ class EmployeesController < ApplicationController
   def create
     employee = Employee.create(employee_params)
     if employee.valid?
+      AddReporteesService.new(
+        @employee, params[:employee][:reportees_attributes]
+      ).call
       render json: employee.as_json(json_attributes), status: :ok
     else
       render json: employee.errors, status: :unprocessable_entity
@@ -23,6 +26,9 @@ class EmployeesController < ApplicationController
   def update
     @employee.update(employee_params)
     if @employee.valid?
+      AddReporteesService.new(
+        @employee, params[:employee][:reportees_attributes]
+      ).call
       render json: @employee.as_json(json_attributes), status: :ok
     else
       render json: @employee.errors, status: :unprocessable_entity
@@ -30,9 +36,9 @@ class EmployeesController < ApplicationController
   end
   
   def show
-    render json: @employee.as_json({
-      methods: [:parent], except: [:created_at, :updated_at]
-    })
+    render json: @employee.as_json(json_attributes.merge({
+      methods: [:parent]
+    }))
   end
 
   def resign
@@ -46,6 +52,7 @@ class EmployeesController < ApplicationController
   def search_params scope, search_params
     scope.where('name ilike :name', name: search_params[:name])
   end
+
   private
   def find_employee
     @employee = Employee.find params[:id]
