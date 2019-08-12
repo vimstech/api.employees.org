@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :set_cors
+  prepend_before_action :set_cors
 
   def status
     render json: { status: :ok, date: Time.now() }, status: :ok
@@ -27,7 +27,8 @@ class ApplicationController < ActionController::API
     scope = scope.where(build_params[:query_options]) if build_params[:query_options]
     scope = scope.select(build_params[:only]) if build_params[:only]
 
-    scope = build_search(scope, build_params[:search]) if build_params[:search].present?
+    # scope = build_search(scope, build_params[:search]) if build_params[:search].present?
+    scope = scope.order(build_params[:order]) if build_params[:order]
 
     if build_params[:page] && build_params[:per]
       page = build_params[:page].to_i
@@ -40,11 +41,12 @@ class ApplicationController < ActionController::API
   end
 
   def build_search scope, search_params
-    scope
+    scope = scope.where('name ilike ?', "%#{search_params[:name]}%")
   end
 
   def set_response_headers  total, page, per, offset
-    pages = (total/per).to_i
+    pages = (total/per).round
+    pages = pages + 1 if pages * per < total
     response.headers["X-Pagination"] = {
       total: total,
       pages: pages == 0 ? 1 : pages,
@@ -56,6 +58,8 @@ class ApplicationController < ActionController::API
   end
 
   def set_cors
+    headers['Access-Control-Allow-Headers'] = '*'
+    headers['Access-Control-Expose-Headers'] = '*'
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Request-Method'] = '*'
   end

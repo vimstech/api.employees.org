@@ -1,8 +1,14 @@
 class EmployeesController < ApplicationController
-  before_action :find_employee, except: [:index, :create, :top]
+  before_action :find_employee, except: [:index, :create, :top, :search]
 
   def index
     employees = build_scope(Employee)
+    render json: employees.as_json(json_attributes)
+  end
+
+  def search
+    employees = Employee.where('role!="ceo" AND name LIKE ?', "%#{params[:search]}%")
+    employees = build_scope(employees)
     render json: employees.as_json(json_attributes)
   end
 
@@ -19,12 +25,13 @@ class EmployeesController < ApplicationController
       ).call
       render json: employee.as_json(json_attributes), status: :ok
     else
+      Rails.logger.error employee.errors.full_messages
       render json: employee.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    @employee.update(employee_params)
+    @employee.update_attributes(employee_params)
     if @employee.valid?
       AddReporteesService.new(
         @employee, params[:employee][:reportees_attributes]
@@ -36,9 +43,7 @@ class EmployeesController < ApplicationController
   end
   
   def show
-    render json: @employee.as_json(json_attributes.merge({
-      methods: [:parent]
-    }))
+    render json: @employee.as_json(json_attributes)
   end
 
   def resign
@@ -49,8 +54,8 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def search_params scope, search_params
-    scope.where('name ilike :name', name: search_params[:name])
+  def build_search scope, search_params
+    scope.where('name ilike :name', name: "%${search_params[:name]}%")
   end
 
   private

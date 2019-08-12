@@ -10,7 +10,7 @@ class Employee < ApplicationRecord
   ROLES = Roles.constants.map{|c| Roles.const_get(c)}
 
   belongs_to :reporter, class_name: "Employee", foreign_key: :parent_id, optional: true
-  has_many :reportees, class_name: "Employee", inverse_of: :reporter, foreign_key: :parent_id
+  has_many :reportees, class_name: "Employee", inverse_of: :reporter
 
   validates :email, uniqueness: true
 
@@ -21,11 +21,14 @@ class Employee < ApplicationRecord
 
   ROLES.each do |role|
     scope role.to_sym, ->{ where(role: role) }
+    define_method "is_#{role}".to_sym do
+      return self.role == role
+    end
   end
 
   def valid_role?
     if ROLES.exclude?(self.role)
-      self.errors[:role] << " can only have values (#{roles.join(', ')})."
+      self.errors[:role] << " can only have values (#{ROLES.join(', ')})."
     end
   end
 
