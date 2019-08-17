@@ -10,7 +10,7 @@ class Employee < ApplicationRecord
   ROLES = Roles.constants.map{|c| Roles.const_get(c)}
 
   belongs_to :reporter, class_name: "Employee", foreign_key: :parent_id, optional: true
-  has_many :reportees, class_name: "Employee", inverse_of: :reporter
+  has_many :reportees, class_name: "Employee", foreign_key: :parent_id
 
   validates :email, uniqueness: true
 
@@ -54,9 +54,9 @@ class Employee < ApplicationRecord
 
   def resign
     # all reportees under resignee should report to its reporter
-    self.reportees.update_all({parent_id: self.parent_id})
-    self.is_active = false
-    self.parent_id = nil
-    save
+    self.transaction do
+      self.reportees.update_all({parent_id: self.parent_id})
+      self.update(is_active: false, parent_id: nil)
+    end
   end
 end
