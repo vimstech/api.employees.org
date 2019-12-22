@@ -8,7 +8,7 @@ class AddReporteesService
   def call
     return if reporter.nil? || reportees_attributes.nil?
     return if reporter.is_sde?
-    assign_reportees
+    assign_reportees()
   end
 
   def assign_reportees
