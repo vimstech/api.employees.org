@@ -5,7 +5,7 @@ ruby '2.6.0'
 
 gem 'rails', '~> 5.2.3'
 gem 'sqlite3'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'rack-cors'
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
