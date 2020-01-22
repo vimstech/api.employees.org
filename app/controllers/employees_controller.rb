@@ -1,8 +1,16 @@
 class EmployeesController < ApplicationController
   before_action :find_employee, except: [:index, :create, :top, :search]
 
+  def api_resource
+    Employee
+  end
+
+  def default_scope
+    api_resource.all
+  end
+
   def index
-    employees = build_scope(Employee)
+    employees = build_scope(default_scope)
     render json: employees.as_json(json_attributes)
   end
 
@@ -42,7 +50,7 @@ class EmployeesController < ApplicationController
       render json: @employee.errors, status: :unprocessable_entity
     end
   end
-  
+
   def show
     render json: @employee.as_json(json_attributes)
   end
