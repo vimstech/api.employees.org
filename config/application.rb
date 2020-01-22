@@ -17,9 +17,9 @@ module ApiEmployeesOrg
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-         origins '*'
-         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete]
-       end
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete]
+      end
     end
 
     config.action_dispatch.default_headers = {
