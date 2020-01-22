@@ -1,6 +1,6 @@
 class AddReporteesService
   attr_reader :reporter, :reportees_attributes
-  def initialize reporter, reportees_attributes
+  def initialize(reporter, reportees_attributes)
     @reportees_attributes = reportees_attributes
     @reporter = reporter
   end

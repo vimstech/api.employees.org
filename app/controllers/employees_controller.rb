@@ -38,6 +38,7 @@ class EmployeesController < ApplicationController
       ).call
       render json: @employee.as_json(json_attributes), status: :ok
     else
+      Rails.logger.error employee.errors.full_messages
       render json: @employee.errors, status: :unprocessable_entity
     end
   end
@@ -50,6 +51,7 @@ class EmployeesController < ApplicationController
     if @employee.resign
       render json: @employee, status: :ok
     else
+      Rails.logger.error employee.errors.full_messages
       render json: @employee.errors, status: :unprocessable_entity
     end
   end

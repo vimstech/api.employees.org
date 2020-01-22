@@ -31,8 +31,8 @@ class ApplicationController < ActionController::API
     scope = scope.order(build_params[:order]) if build_params[:order]
 
     if build_params[:page] && build_params[:per]
-      page = build_params[:page].to_i
-      per = build_params[:per].to_i
+      page = build_params[:page].to_i || 1
+      per = build_params[:per].to_i || 10
       offset = (page - 1) * per
       scope = scope.offset(offset).limit(build_params[:per])
       set_response_headers total, page, per, offset
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::API
     scope = scope.where('name ilike ?', "%#{search_params[:name]}%")
   end
 
-  def set_response_headers  total, page, per, offset
+  def set_response_headers total, page, per, offset
     pages = (total/per).round
     pages = pages + 1 if pages * per < total
     response.headers["X-Pagination"] = {
